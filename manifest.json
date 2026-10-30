@@ -1,0 +1,38 @@
+{
+  "name": "GodaNashik - फिरस्ती आणि वारसा",
+  "short_name": "GodaNashik",
+  "description": "नाशिकची खाद्यसंस्कृती, मंदिरे, किल्ले, वाइनरीज आणि ऐतिहासिक वारसा एक्सप्लोर करा.",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#1c1917",
+  "theme_color": "#7c2d12",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "https://cdn-icons-png.flaticon.com/512/854/854878.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "https://cdn-icons-png.flaticon.com/512/854/854878.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "नाशिक मिसळ",
+      "short_name": "मिसळ",
+      "description": "नाशिकमधील प्रसिद्ध चुलीवरची व काळा मसाला मिसळ",
+      "url": "./index.html#misal"
+    },
+    {
+      "name": "मंदिरे व तीर्थ",
+      "short_name": "मंदिरे",
+      "description": "त्र्यंबकेश्वर, काळाराम व जिल्ह्यातील तीर्थक्षेत्रे",
+      "url": "./index.html#temples"
+    }
+  ]
+}
