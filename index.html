@@ -7,9 +7,10 @@
     <!-- Tailwind CSS & FontAwesome Icons -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#7c2d12">
-    
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" type="image/png" href="icons/icon-192.png">
+    <link rel="apple-touch-icon" href="icons/icon-192.png">
     <style>
         .active-pill {
             background-color: #7c2d12 !important;
@@ -23,159 +24,31 @@
             -ms-overflow-style: none;
             scrollbar-width: none;
         }
-        /* Splash Screen Zero-Lag Styles */
-        .splash-slide {
-            position: absolute;
-            inset: 0;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.6s ease-in-out, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-            transform: scale(1.05);
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-        }
-        .splash-slide.active {
-            opacity: 1;
-            pointer-events: auto;
-            transform: scale(1);
-            z-index: 10;
-        }
-        .splash-img {
-            position: absolute;
-            inset: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            filter: brightness(0.72);
-        }
-        .splash-overlay {
-            position: relative;
-            z-index: 2;
-            padding: 2.5rem 1.5rem 2rem 1.5rem;
-            background: linear-gradient(to top, rgba(28, 18, 12, 0.95) 0%, rgba(28, 18, 12, 0.6) 60%, transparent 100%);
-            text-align: center;
-        }
     </style>
 </head>
 <body class="bg-amber-50/40 text-stone-800 font-sans min-h-screen flex flex-col pb-24">
 
-    <!-- ========================================== -->
-    <!-- 🎬 CINEMATIC ANIMATED SPLASH SCREEN        -->
-    <!-- ========================================== -->
-    <div id="splashScreen" class="fixed inset-0 z-50 bg-[#1c120c] flex flex-col items-center justify-between overflow-hidden text-white transition-opacity duration-700">
-        <!-- Skip Button -->
-        <div class="w-full max-w-md p-4 flex justify-end z-20">
-            <button onclick="dismissSplash()" class="bg-black/50 backdrop-blur-md border border-white/20 text-stone-300 hover:text-white text-xs px-3.5 py-1.5 rounded-full flex items-center gap-1.5 transition">
-                <span>Skip</span>
-                <i class="fa-solid fa-chevron-right text-[10px]"></i>
-            </button>
-        </div>
-
-        <!-- Dynamic Stages -->
-        <div class="relative w-full max-w-md flex-1 flex items-center justify-center overflow-hidden">
-            <!-- Slide 1: Map Path -->
-            <div id="splashSlide1" class="splash-slide active flex flex-col items-center justify-center p-6 text-center">
-                <div class="relative w-64 h-64 border border-amber-500/20 rounded-2xl p-4 bg-amber-950/20 backdrop-blur-sm flex items-center justify-center">
-                    <svg viewBox="0 0 200 200" class="w-full h-full stroke-amber-500 fill-none stroke-[2] drop-shadow-[0_0_12px_rgba(245,158,11,0.5)]">
-                        <polygon points="40,90 90,40 160,50 180,110 140,160 70,150 30,120" stroke-dasharray="4" class="animate-pulse opacity-70" />
-                        <path d="M 30,120 Q 90,110 170,130" stroke="#38bdf8" stroke-width="3" stroke-linecap="round" />
-                    </svg>
-                    <div class="absolute text-[11px] font-bold text-amber-400 bg-stone-900/80 px-2.5 py-1 rounded-lg border border-amber-500/40">नाशिक जिल्हा नकाशा</div>
-                </div>
-                <p class="mt-4 text-xs tracking-widest text-amber-300 uppercase font-bold">GodaNashik Tourism</p>
-            </div>
-
-            <!-- Slide 2: Ramkund -->
-            <div id="splashSlide2" class="splash-slide">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Ram_kund_Nashik.jpg/800px-Ram_kund_Nashik.jpg" alt="Ramkund" class="splash-img">
-                <div class="splash-overlay">
-                    <h3 class="text-xl font-black text-amber-400">रामकुंड • पंचवटी</h3>
-                    <p class="text-xs font-semibold tracking-wider uppercase text-stone-200">Godavari Aarti & Sacred Ghats</p>
-                </div>
-            </div>
-
-            <!-- Slide 3: HAL Sukhoi -->
-            <div id="splashSlide3" class="splash-slide">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Sukhoi_Su-30MKI_at_Aero_India_2011.jpg/800px-Sukhoi_Su-30MKI_at_Aero_India_2011.jpg" alt="HAL Sukhoi" class="splash-img">
-                <div class="splash-overlay">
-                    <h3 class="text-xl font-black text-amber-400">HAL ओझर • सुखोई</h3>
-                    <p class="text-xs font-semibold tracking-wider uppercase text-stone-200">Fighter Jets Made In Nashik</p>
-                </div>
-            </div>
-
-            <!-- Slide 4: Sula Vineyards -->
-            <div id="splashSlide4" class="splash-slide">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/Sula_Vineyards_Nashik.jpg/800px-Sula_Vineyards_Nashik.jpg" alt="Sula" class="splash-img">
-                <div class="splash-overlay">
-                    <h3 class="text-xl font-black text-amber-400">सुला • द्राक्षमळे</h3>
-                    <p class="text-xs font-semibold tracking-wider uppercase text-stone-200">Wine Capital Of India</p>
-                </div>
-            </div>
-
-            <!-- Slide 5: Trimbakeshwar -->
-            <div id="splashSlide5" class="splash-slide">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Trimbakeshwar_Shiva_Temple%2C_Trimbak%2C_Nashik_district.jpg/800px-Trimbakeshwar_Shiva_Temple%2C_Trimbak%2C_Nashik_district.jpg" alt="Trimbakeshwar" class="splash-img">
-                <div class="splash-overlay">
-                    <h3 class="text-xl font-black text-amber-400">त्र्यंबकेश्वर • सह्याद्री</h3>
-                    <p class="text-xs font-semibold tracking-wider uppercase text-stone-200">Jyotirlinga & Sahyadri Treks</p>
-                </div>
-            </div>
-
-            <!-- Slide 6: Nashik Misal -->
-            <div id="splashSlide6" class="splash-slide">
-                <img src="https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?w=800&auto=format&fit=crop&q=80" alt="Misal" class="splash-img">
-                <div class="splash-overlay">
-                    <h3 class="text-xl font-black text-amber-400">नाशिक मिसळ</h3>
-                    <p class="text-xs font-semibold tracking-wider uppercase text-stone-200">झणझणीत रस्सा • चुलीवरची चव</p>
-                </div>
-            </div>
-
-            <!-- Slide 7: Logo Finale -->
-            <div id="splashSlide7" class="splash-slide flex flex-col items-center justify-center p-6 text-center">
-                <img src="logo.png" onerror="this.src='https://cdn-icons-png.flaticon.com/512/854/854878.png'" alt="GodaNashik Logo" class="w-32 h-32 rounded-2xl shadow-2xl border-2 border-amber-500/50 mb-4 animate-bounce object-cover">
-                <h2 class="text-2xl font-black text-amber-400 tracking-tight">गोदानासिक</h2>
-                <h3 class="text-lg font-bold text-amber-200 tracking-wider">GodaNashik</h3>
-                <p class="text-[11px] text-stone-400 mt-2 font-medium tracking-widest uppercase">फिरस्ती • खाद्यसंस्कृती • वारसा</p>
-            </div>
-        </div>
-
-        <!-- Progress Indicator -->
-        <div class="w-full max-w-md p-6 z-20">
-            <div class="w-full bg-stone-800 h-1.5 rounded-full overflow-hidden">
-                <div id="splashProgress" class="bg-amber-500 h-full w-0 transition-all duration-300 ease-linear"></div>
-            </div>
-        </div>
-    </div>
-
-    <!-- ========================================== -->
-    <!-- 📱 MAIN APP HEADER & SEARCH                -->
-    <!-- ========================================== -->
+    <!-- Top App Bar -->
     <header class="bg-stone-900 text-white shadow-lg sticky top-0 z-40 border-b border-amber-900/40">
-        <div class="max-w-md mx-auto px-4 py-2.5 flex items-center justify-between">
-            <!-- App Brand with Logo -->
-            <div class="flex items-center gap-2.5 cursor-pointer" onclick="filterCategory('all')">
-                <img src="logo.png" onerror="this.src='https://cdn-icons-png.flaticon.com/512/854/854878.png'" alt="Logo" class="w-9 h-9 rounded-xl object-cover shadow border border-amber-500/40">
+        <div class="max-w-md mx-auto px-4 py-3 flex items-center justify-between">
+            <div class="flex items-center gap-2 cursor-pointer" onclick="filterCategory('all')">
+                <img src="icons/logo.png" alt="GodaNashik लोगो" class="w-10 h-10 rounded-xl shadow-md shrink-0">
                 <div>
-                    <h1 class="text-lg font-bold tracking-tight text-white leading-none">Goda<span class="text-amber-500">Nashik</span></h1>
+                    <h1 class="text-xl font-bold tracking-tight text-white leading-none">Goda<span class="text-amber-500">Nashik</span></h1>
                     <p class="text-[10px] text-stone-400 font-medium">नाशिक दर्शन आणि गाईड</p>
                 </div>
             </div>
-
-            <!-- Action Buttons -->
             <div class="flex items-center gap-2">
-                <!-- PWA Install Button -->
-                <button id="installAppBtn" onclick="installPWA()" class="hidden bg-amber-500 hover:bg-amber-600 text-stone-900 px-2.5 py-1.5 rounded-full shadow transition flex items-center gap-1 text-[11px] font-bold border border-amber-300">
+                <!-- Install App Button (Default: hidden, prompt आल्यावर आपोआप दिसेल) -->
+                <button id="installAppBtn" onclick="installPWA()" class="hidden bg-amber-500 hover:bg-amber-600 text-stone-900 px-3 py-1.5 rounded-full shadow transition flex items-center gap-1.5 text-xs font-bold border border-amber-300">
                     <i class="fa-solid fa-download"></i>
-                    <span>Install</span>
+                    <span>Install App</span>
                 </button>
-                
-                <!-- My Plan Button -->
                 <button onclick="openPlanModal()" class="relative bg-amber-600 hover:bg-amber-700 text-white px-3 py-1.5 rounded-full shadow transition flex items-center gap-1.5 text-xs font-semibold">
-                    <i class="fa-solid fa-route"></i>
-                    <span>प्लॅन</span>
-                    <span id="planBadge" class="bg-rose-600 text-white text-[10px] font-bold rounded-full px-1.5 py-0.2">0</span>
-                </button>
+                <i class="fa-solid fa-route"></i>
+                <span>माझा प्लॅन</span>
+                <span id="planBadge" class="bg-rose-600 text-white text-[10px] font-bold rounded-full px-1.5 py-0.2">0</span>
+            </button>
             </div>
         </div>
 
@@ -200,32 +73,35 @@
         </div>
     </div>
 
-    <!-- Category Filters (Horizontal Scroll) -->
+    <!-- Category Filter Bar (Horizontal Scrollable) -->
     <div class="bg-white border-b border-stone-200 sticky top-[95px] z-30 shadow-sm">
         <div class="max-w-md mx-auto px-3 py-2 flex gap-1.5 overflow-x-auto hide-scrollbar text-xs">
-            <button onclick="filterCategory('all')" id="btn-all" class="cat-pill active-pill px-3 py-1.5 rounded-full border border-stone-200 bg-stone-100 text-stone-700 font-semibold whitespace-nowrap transition">🌟 सर्व</button>
-            <button onclick="filterCategory('misal')" id="btn-misal" class="cat-pill px-3 py-1.5 rounded-full border border-stone-200 bg-stone-100 text-stone-700 font-semibold whitespace-nowrap transition">🍛 मिसळ</button>
+            <button onclick="filterCategory('all')" id="btn-all" class="cat-pill active-pill px-3 py-1.5 rounded-full border border-stone-200 bg-stone-100 text-stone-700 font-semibold whitespace-nowrap transition">🌟 सर्व ठिकाणे</button>
+            <button onclick="filterCategory('misal')" id="btn-misal" class="cat-pill px-3 py-1.5 rounded-full border border-stone-200 bg-stone-100 text-stone-700 font-semibold whitespace-nowrap transition">🍛 नाशिक मिसळ</button>
             <button onclick="filterCategory('temples')" id="btn-temples" class="cat-pill px-3 py-1.5 rounded-full border border-stone-200 bg-stone-100 text-stone-700 font-semibold whitespace-nowrap transition">🛕 मंदिरे व तीर्थ</button>
-            <button onclick="filterCategory('street')" id="btn-street" class="cat-pill px-3 py-1.5 rounded-full border border-stone-200 bg-stone-100 text-stone-700 font-semibold whitespace-nowrap transition">🍴 स्ट्रीट फूड</button>
+            <button onclick="filterCategory('street')" id="btn-street" class="cat-pill px-3 py-1.5 rounded-full border border-stone-200 bg-stone-100 text-stone-700 font-semibold whitespace-nowrap transition">🍴 स्ट्रीट फूड & मिठाई</button>
             <button onclick="filterCategory('cafes')" id="btn-cafes" class="cat-pill px-3 py-1.5 rounded-full border border-stone-200 bg-stone-100 text-stone-700 font-semibold whitespace-nowrap transition">☕ कॅफेज</button>
-            <button onclick="filterCategory('nonveg')" id="btn-nonveg" class="cat-pill px-3 py-1.5 rounded-full border border-stone-200 bg-stone-100 text-stone-700 font-semibold whitespace-nowrap transition">🍗 नॉन-व्हेज</button>
-            <button onclick="filterCategory('defense')" id="btn-defense" class="cat-pill px-3 py-1.5 rounded-full border border-stone-200 bg-stone-100 text-stone-700 font-semibold whitespace-nowrap transition">✈️ डिफेन्स & वारसा</button>
-            <button onclick="filterCategory('wine')" id="btn-wine" class="cat-pill px-3 py-1.5 rounded-full border border-stone-200 bg-stone-100 text-stone-700 font-semibold whitespace-nowrap transition">🍇 वाइन & फार्म्स</button>
-            <button onclick="filterCategory('forts')" id="btn-forts" class="cat-pill px-3 py-1.5 rounded-full border border-stone-200 bg-stone-100 text-stone-700 font-semibold whitespace-nowrap transition">⛰️ किल्ले & लेणी</button>
+            <button onclick="filterCategory('nonveg')" id="btn-nonveg" class="cat-pill px-3 py-1.5 rounded-full border border-stone-200 bg-stone-100 text-stone-700 font-semibold whitespace-nowrap transition">🍗 नॉन-व्हेज & बिर्याणी</button>
+            <button onclick="filterCategory('defense')" id="btn-defense" class="cat-pill px-3 py-1.5 rounded-full border border-stone-200 bg-stone-100 text-stone-700 font-semibold whitespace-nowrap transition">✈️ डिफेन्स & अभिमान</button>
+            <button onclick="filterCategory('wine')" id="btn-wine" class="cat-pill px-3 py-1.5 rounded-full border border-stone-200 bg-stone-100 text-stone-700 font-semibold whitespace-nowrap transition">🍇 वाइन & कृषी पर्यटन</button>
+            <button onclick="filterCategory('forts')" id="btn-forts" class="cat-pill px-3 py-1.5 rounded-full border border-stone-200 bg-stone-100 text-stone-700 font-semibold whitespace-nowrap transition">⛰️ किल्ले, लेणी व ट्रेक्स</button>
         </div>
     </div>
 
     <!-- Main Content Area -->
     <main class="max-w-md mx-auto px-4 py-4 w-full flex-1">
+        <!-- Results Count -->
         <div class="flex items-center justify-between mb-3 text-xs text-stone-500 font-medium px-1">
             <span id="spotsCount">५० पैकी सर्व ठिकाणे दाखवत आहे</span>
             <span id="currentFilterLabel" class="text-amber-800 font-semibold">सर्व ठिकाणे</span>
         </div>
 
         <!-- Cards Container -->
-        <div id="spotsGrid" class="space-y-4"></div>
+        <div id="spotsGrid" class="space-y-4">
+            <!-- Cards will be dynamically injected here -->
+        </div>
 
-        <!-- No Results -->
+        <!-- No Results Fallback -->
         <div id="noResults" class="hidden text-center py-12">
             <i class="fa-solid fa-map-location-dot text-4xl text-stone-300 mb-2"></i>
             <p class="text-stone-500 text-sm font-semibold">काहीही सापडले नाही!</p>
@@ -233,7 +109,7 @@
         </div>
     </main>
 
-    <!-- My Plan Modal -->
+    <!-- My Plan (Wishlist) Modal -->
     <div id="planModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden flex items-end sm:items-center justify-center p-0 sm:p-4">
         <div class="bg-white w-full max-w-md rounded-t-2xl sm:rounded-2xl max-h-[80vh] flex flex-col shadow-2xl overflow-hidden">
             <div class="p-4 bg-stone-900 text-white flex items-center justify-between">
@@ -243,7 +119,9 @@
                 </div>
                 <button onclick="closePlanModal()" class="text-stone-400 hover:text-white"><i class="fa-solid fa-xmark text-lg"></i></button>
             </div>
-            <div id="planItemsList" class="p-4 overflow-y-auto space-y-3 flex-1 text-xs"></div>
+            <div id="planItemsList" class="p-4 overflow-y-auto space-y-3 flex-1 text-xs">
+                <!-- Saved items will appear here -->
+            </div>
             <div class="p-3 bg-stone-50 border-t border-stone-200 flex justify-between items-center text-xs">
                 <button onclick="clearPlan()" class="text-rose-600 hover:underline font-semibold">सर्व साफ करा</button>
                 <button onclick="closePlanModal()" class="bg-amber-800 text-white px-4 py-2 rounded-xl font-bold">पूर्ण झाले</button>
@@ -251,20 +129,21 @@
         </div>
     </div>
 
-    <!-- ========================================== -->
-    <!-- ⚙️ JAVASCRIPT CODE & ORIGINAL DATA STORE   -->
-    <!-- ========================================== -->
+    <!-- JavaScript Application Logic -->
     <script>
+        // ==========================================
+        // DATA STORE: ALL 50 NASHIK SPOTS
+        // ==========================================
         const spots = [
             // 1. MISAL
-            { id: 1, name: "Sadhana Chulivarchi Misal", marathiName: "साधना चूलिवरची मिसळ", category: "misal", badge: "🍛 चुलीवरची मिसळ", area: "Gangapur Road", image: "https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?w=600&auto=format&fit=crop&q=80", desc: "चुलीवरचा अस्सल झणझणीत रस्सा, गरमागरम भाकरी/पाव, सोबतीला गूळ-जिलबी आणि निसर्गरम्य परिसर.", highlight: "Chulivarchi Misal & Gulab Jalebi", mapQuery: "Sadhana Chulivarchi Misal Gangapur Road Nashik", timing: "8:00 AM - 3:00 PM" },
-            { id: 2, name: "Hotel Shamsundar Misal", marathiName: "हॉटेल शमसुंदर मिसळ", category: "misal", badge: "🍛 अस्सल नाशिक चव", area: "Satpur MIDC", image: "https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=600&auto=format&fit=crop&q=80", desc: "स्थानिक नाशिककरांची नंबर १ आवडती मिसळ, राष्ट्रीय पुरस्कारप्राप्त आणि सोबत मिळणारी खास पाव-वडी.", highlight: "Pav-Vadi & Authentic Spices", mapQuery: "Hotel Shamsundar Satpur MIDC Nashik", timing: "8:00 AM - 2:00 PM" },
+            { id: 1, name: "Sadhana Chulivarchi Misal", marathiName: "साधना चूलिवरची मिसळ", category: "misal", badge: "🍛 चुलीवरची मिसळ", area: "Gangapur Road", image: "https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?w=600&auto=format&fit=crop&q=80", desc: "चुलीवरचा अस्सल झणझणीत रस्सा, गरमागरम भाकरी/पाव, सोबतीला गूळ-जिलबी आणि निसर्गरम्य ग्रामीण परिसर.", highlight: "Chulivarchi Misal & Gulab Jalebi", mapQuery: "Sadhana Chulivarchi Misal Gangapur Road Nashik", timing: "8:00 AM - 3:00 PM" },
+            { id: 2, name: "Hotel Shamsundar Misal", marathiName: "हॉटेल शमसुंदर मिसळ", category: "misal", badge: "🍛 स्थानिक पसंती #1", area: "Satpur MIDC", image: "https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=600&auto=format&fit=crop&q=80", desc: "स्थानिक नाशिककरांची नंबर १ आवडती मिसळ, राष्ट्रीय पुरस्कारप्राप्त आणि सोबत मिळणारी खास पाव-वडी.", highlight: "Pav-Vadi & Authentic Spices", mapQuery: "Hotel Shamsundar Satpur MIDC Nashik", timing: "8:00 AM - 2:00 PM" },
             { id: 3, name: "Shree Ambika Misal", marathiName: "श्री अंबिका मिसळ", category: "misal", badge: "🍛 काळा मसाला रस्सा", area: "Panchavati", image: "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=600&auto=format&fit=crop&q=80", desc: "पंचवटीची प्रसिद्ध काळी मिसळ, मध्यम तिखट पण अतिशय चविष्ट पारंपरिक काळ्या मसाल्याचा कट.", highlight: "Kala Masala Tarri", mapQuery: "Hotel Ambika Misal Panchavati Nashik", timing: "9:00 AM - 5:00 PM" },
             { id: 4, name: "Hotel Tushar Misal House", marathiName: "हॉटेल तुषार मिसळ हाऊस", category: "misal", badge: "🍛 कॉलेज कट्टा", area: "College Road", image: "https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=600&auto=format&fit=crop&q=80", desc: "कॉलेज तरुणाईचा आवडता कट्टा, झणझणीत लाल रस्सा आणि स्पेशल दही मिसळ.", highlight: "Spicy Tarri & Dahi Misal", mapQuery: "Hotel Tushar Misal House College Road Nashik", timing: "8:30 AM - 8:30 PM" },
             { id: 5, name: "Peruchi Wadi Chulivarachi Misal", marathiName: "पेरूची वाडी चूलिवरची मिसळ", category: "misal", badge: "🍛 फार्म वातावरण", area: "Mungsare", image: "https://images.unsplash.com/photo-1500651230702-0e2d8a49d4ad?w=600&auto=format&fit=crop&q=80", desc: "पेरूच्या बागेतील फार्म वातावरण आणि चुलीवरची अस्सल गावरान चवीची मिसळ.", highlight: "Guava Farm & Chulivarchi Misal", mapQuery: "Peruchi Wadi Chulivarchi Misal Mungsare Nashik", timing: "8:00 AM - 4:00 PM" },
             { id: 6, name: "Hotel Krishna Vijay", marathiName: "हॉटेल कृष्णा विजय", category: "misal", badge: "🍛 पारंपरिक चव", area: "Gangapur Road", image: "https://images.unsplash.com/photo-1626777552726-4a6b54c97e46?w=600&auto=format&fit=crop&q=80", desc: "जुनी पारंपरिक चव, मध्यम तिखट आणि घरगुती मसाल्यांचा हलका चवदार रस्सा.", highlight: "Homestyle Balanced Taste", mapQuery: "Hotel Krishna Vijay Gangapur Road Nashik", timing: "7:30 AM - 2:30 PM" },
             { id: 7, name: "Hotel Vihar", marathiName: "हॉटेल विहार मिसळ", category: "misal", badge: "🍛 झणझणीत मिसळ", area: "Gangapur Naka", image: "https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=600&auto=format&fit=crop&q=80", desc: "खवय्यांची आवडती तिखट झणझणीत मिसळ आणि जलद सर्व्हिस.", highlight: "Spicy Local Punch", mapQuery: "Hotel Vihar Misal Gangapur Naka Nashik", timing: "8:00 AM - 2:00 PM" },
-            { id: 8, name: "Grape Embassy & Zatka Misal", marathiName: "द्राक्ष एम्बसी आणि झटका मिसळ", category: "misal", badge: "🍇 व्हाइनयार्ड मिसळ", area: "Makhmalabad", image: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/Sula_Vineyards_Nashik.jpg/800px-Sula_Vineyards_Nashik.jpg", desc: "द्राक्षांच्या बागेत बसून खाण्याचा आनंद आणि अतिशय तिखट-झणझणीत झटका मिसळ.", highlight: "Vineyard Ambience & Zatka Tarri", mapQuery: "Grape Embassy Farm Agro Tourism Nashik", timing: "8:00 AM - 4:00 PM" },
+            { id: 8, name: "Grape Embassy & Zatka Misal", marathiName: "द्राक्ष एम्बसी आणि झटका मिसळ", category: "misal", badge: "🍇 व्हाइनयार्ड मिसळ", area: "Makhmalabad", image: "https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?w=600&auto=format&fit=crop&q=80", desc: "द्राक्षांच्या बागेत बसून खाण्याचा आनंद आणि अतिशय तिखट-झणझणीत झटका मिसळ.", highlight: "Vineyard Ambience & Zatka Tarri", mapQuery: "Grape Embassy Farm Agro Tourism Nashik", timing: "8:00 AM - 4:00 PM" },
             { id: 9, name: "Mamacha Mala Misal", marathiName: "मामाचा मळा मिसळ", category: "misal", badge: "🌾 कृषी पर्यटन", area: "Makhmalabad Road", image: "https://images.unsplash.com/photo-1464226184884-fa280b87c399?w=600&auto=format&fit=crop&q=80", desc: "शेतातील कौटुंबिक वातावरण, हुरडा पार्टी आणि चुलीवरची गावरान मिसळ.", highlight: "Hurda Party & Agro Tour", mapQuery: "Mamacha Mala Misal Makhmalabad Nashik", timing: "8:00 AM - 4:00 PM" },
 
             // 2. STREET FOOD & SWEETS
@@ -272,10 +151,10 @@
             { id: 11, name: "Viju's Dabeli", marathiName: "विजूज दाबेली", category: "street", badge: "🍴 बटर दाबेली", area: "College Road", image: "https://images.unsplash.com/photo-1565557623262-b51c2513a641?w=600&auto=format&fit=crop&q=80", desc: "कॉलेज रोडवरील अमूल बटर दाबेली आणि क्रिस्पी चीज टोस्ट दाबेली.", highlight: "Amul Butter & Cheese Dabeli", mapQuery: "Vijus Dabeli College Road Nashik", timing: "11:00 AM - 10:30 PM" },
             { id: 12, name: "Krishna Vada Pav", marathiName: "कृष्णा वडापाव", category: "street", badge: "🍴 गरमागरम वडापाव", area: "Gangapur Road", image: "https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=600&auto=format&fit=crop&q=80", desc: "गरमागरम मोठा वडापाव, सोबतीला तिखट लसूण चटणी आणि तळलेली मिरची.", highlight: "Jumbo Vada Pav & Lasun Chutney", mapQuery: "Krishna Vada Pav Gangapur Road Nashik", timing: "8:00 AM - 9:00 PM" },
             { id: 13, name: "Bhagwati Vada Pav (Sinnar)", marathiName: "भगवती वडापाव (सिन्नर)", category: "street", badge: "🍴 सिन्नर स्पेशल वडापाव", area: "Sinnar", image: "https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=600&auto=format&fit=crop&q=80", desc: "सिन्नरचा जगप्रसिद्ध कुरकुरीत वडापाव आणि अस्सल तिखट ठेचा-चटणी.", highlight: "Iconic Sinnar Vada Pav", mapQuery: "Bhagwati Vada Pav Sinnar Nashik", timing: "8:00 AM - 9:00 PM" },
-            { id: 14, name: "Samarth Juice Centre", marathiName: "समर्थ ज्यूस सेंटर", category: "street", badge: "🍍 फ्रेश अननस ज्यूस", area: "Sinnar", image: "https://images.unsplash.com/photo-1550258987-190a2d41a8ba?w=600&auto=format&fit=crop&q=80", desc: "सिन्नरचा १००% फ्रेश आणि थंडगार अननस ज्यूस, वडापावसोबतचे कॉम्बिनेशन.", highlight: "Fresh Pineapple Juice", mapQuery: "Samarth Juice Centre Sinnar Nashik", timing: "9:00 AM - 10:00 PM" },
+            { id: 14, name: "Samarth Juice Centre", marathiName: "समर्थ ज्यूस सेंटर", category: "street", badge: "🍍 फ्रेश अननस ज्यूस", area: "Sinnar", image: "https://images.unsplash.com/photo-1550258987-190a2d41a8ba?w=600&auto=format&fit=crop&q=80", desc: "सिन्नरचा १००% फ्रेश आणि थंडगार अननस ज्यूस, वडापावसोबतचे परफेक्ट कॉम्बिनेशन.", highlight: "Fresh Pineapple Juice", mapQuery: "Samarth Juice Centre Sinnar Nashik", timing: "9:00 AM - 10:00 PM" },
             { id: 15, name: "Sayantara", marathiName: "सायंतारा", category: "street", badge: "🍴 साबुदाणा वडा", area: "Bhadrakali", image: "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=600&auto=format&fit=crop&q=80", desc: "नाशिकचा कुरकुरीत साबुदाणा वडा आणि उपवासाची बटाटा कचोरी.", highlight: "Crispy Sabudana Vada", mapQuery: "Sayantara Bhadrakali Nashik", timing: "9:00 AM - 8:30 PM" },
             { id: 16, name: "Budha Halwai", marathiName: "बुधा हलवाई", category: "street", badge: "🍯 साजूक तूप जिलेबी", area: "Bhadrakali", image: "https://images.unsplash.com/photo-1599488615731-7e5c2823ff28?w=600&auto=format&fit=crop&q=80", desc: "अस्सल साजूक तुपातील गरमागरम जिलेबी, फाफडा आणि पारंपरिक मिठाई.", highlight: "Ghee Jalebi & Fafda", mapQuery: "Budha Halwai Bhadrakali Nashik", timing: "7:00 AM - 9:00 PM" },
-            { id: 17, name: "Pande Mithai", marathiName: "पांडे मिठाई", category: "street", badge: "🍬 खुरचन वडी", area: "Main Road", image: "https://images.unsplash.com/photo-1599488615731-7e5c2823ff28?w=600&auto=format&fit=crop&q=80", desc: "नाशिकची ऐतिहासिक प्रसिद्ध खुरचन वडी (Khurchan Wadi) आणि मलाई पेढे.", highlight: "Historic Khurchan Wadi", mapQuery: "Pande Mithai Main Road Nashik", timing: "8:00 AM - 9:30 PM" },
+            { id: 17, name: "Pande Mithai", marathiName: "पांडे मिठाई", category: "street", badge: "🍬 खुरचन वडी", area: "Main Road", image: "https://images.unsplash.com/photo-1599488615731-7e5c2823ff28?w=600&auto=format&fit=crop&q=80", desc: "नाशिकची ऐतिहासिक आणि प्रसिद्ध खुरचन वडी (Khurchan Wadi) आणि मलाई पेढे.", highlight: "Historic Khurchan Wadi", mapQuery: "Pande Mithai Main Road Nashik", timing: "8:00 AM - 9:30 PM" },
             { id: 18, name: "Kondaji Chivda", marathiName: "कोंडाजी चिवडा", category: "street", badge: "🍴 जगप्रसिद्ध चिवडा", area: "Ravivar Karanja", image: "https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=600&auto=format&fit=crop&q=80", desc: "स्वातंत्र्यपूर्व काळापासून प्रसिद्ध असलेला नाशिकचा ब्रँड पोहे चिवडा.", highlight: "Original Nashik Chivda", mapQuery: "Kondaji Chivda Ravivar Karanja Nashik", timing: "9:00 AM - 9:00 PM" },
 
             // 3. CAFES
@@ -285,51 +164,58 @@
             { id: 22, name: "Desi Vesi", marathiName: "देसी वेसी", category: "cafes", badge: "🥗 प्युअर व्हेज", area: "College Road", image: "https://images.unsplash.com/photo-1559925393-8be0ec4767c8?w=600&auto=format&fit=crop&q=80", desc: "१००% शुद्ध शाकाहारी कॅफे, फ्युजन फूड आणि कॉलेज कट्टा.", highlight: "100% Pure Veg Fusion", mapQuery: "Desi Vesi College Road Nashik", timing: "11:00 AM - 11:00 PM" },
 
             // 4. NON-VEG & BIRYANI
-            { id: 23, name: "Divtya Budhlya Wada", marathiName: "दिवट्या बुधल्या वाडा", category: "nonveg", badge: "🍗 गावरान थाळी", area: "Gangapur Road", image: "https://images.unsplash.com/photo-1544025162-d76694265947?w=600&auto=format&fit=crop&q=80", desc: "अस्सल गावरान चिकन, काळा रस्सा आणि चुलीवरची बाजरीची भाकरी.", highlight: "Gavran Black Rassa & Bhakri", mapQuery: "Divtya Budhlya Wada Nashik", timing: "12:00 PM - 11:00 PM" },
+            { id: 23, name: "Divtya Budhlya Wada", marathiName: "दिवट्या बुधल्या वाडा", category: "nonveg", badge: "🍗 गावरान चिकन-मटन", area: "Gangapur Road", image: "https://images.unsplash.com/photo-1544025162-d76694265947?w=600&auto=format&fit=crop&q=80", desc: "अस्सल गावरान चिकन, काळा रस्सा आणि चुलीवरची बाजरीची भाकरी.", highlight: "Gavran Black Rassa & Bhakri", mapQuery: "Divtya Budhlya Wada Nashik", timing: "12:00 PM - 11:00 PM" },
             { id: 24, name: "Kokni Darbar", marathiName: "कोकणी दरबार", category: "nonveg", badge: "🍗 मटन बिर्याणी", area: "Doodh Bazar", image: "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=600&auto=format&fit=crop&q=80", desc: "जुन्या नाशिकची प्रसिद्ध मटन बिर्याणी, मुघलाई डिशेस आणि कबाब.", highlight: "Mutton Dum Biryani", mapQuery: "Kokni Darbar Doodh Bazar Nashik", timing: "12:30 PM - 11:30 PM" },
-            { id: 25, name: "Hotel Yelkot Mutton Bhakri", marathiName: "हॉटेल येळकोट मटन भाकरी", category: "nonveg", badge: "🍗 मटन भाकरी", area: "Canada Corner", image: "https://images.unsplash.com/photo-1544025162-d76694265947?w=600&auto=format&fit=crop&q=80", desc: "अस्सल खानदेशी आणि मराठवाडी चवीची मटन भाकरी आणि तांबडा-पांढरा रस्सा.", highlight: "Spicy Mutton Bhakri Thali", mapQuery: "Hotel Yelkot Mutton Bhakri Canada Corner Nashik", timing: "12:00 PM - 10:30 PM" },
+            { id: 25, name: "Hotel Yelkot Mutton Bhakri", marathiName: "हॉटेल येळकोट मटन भाकरी", category: "nonveg", badge: "🍗 मटन भाकरी स्पेशल", area: "Canada Corner", image: "https://images.unsplash.com/photo-1544025162-d76694265947?w=600&auto=format&fit=crop&q=80", desc: "अस्सल खानदेशी आणि मराठवाडी चवीची मटन भाकरी आणि तांबडा-पांढरा रस्सा.", highlight: "Spicy Mutton Bhakri Thali", mapQuery: "Hotel Yelkot Mutton Bhakri Canada Corner Nashik", timing: "12:00 PM - 10:30 PM" },
             { id: 26, name: "Majhali by Vikram Ugale", marathiName: "माझळी (सी-फूड)", category: "nonveg", badge: "🐟 कोकणी सी-फूड", area: "Indira Nagar", image: "https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?w=600&auto=format&fit=crop&q=80", desc: "सुरमई-पापलेट फ्राय, कोळंबी रस्सा आणि कोकणी पद्धतीची सी-फूड थाळी.", highlight: "Fresh Surmai Fry & Prawns", mapQuery: "Majhali by Vikram Ugale Indira Nagar Nashik", timing: "12:00 PM - 11:00 PM" },
 
-            // 5. DEFENSE & NATIONAL PRIDE (ORIGINAL PHOTOS)
-            { id: 27, name: "HAL Aerospace Museum (Sukhoi Su-30)", marathiName: "एचएएल एरोस्पेस म्युझियम", category: "defense", badge: "✈️ लढाऊ विमाने", area: "Ozar", image: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Sukhoi_Su-30MKI_at_Aero_India_2011.jpg/800px-Sukhoi_Su-30MKI_at_Aero_India_2011.jpg", desc: "सुखोई Su-30 MKI आणि मिग-21 लढाऊ विमानांचे प्रदर्शन, एव्हिएशन गॅलरी.", highlight: "Sukhoi Su-30 & Fighter Jets", mapQuery: "HAL Heritage Centre and Aerospace Museum Ozar Nashik", timing: "9:00 AM - 5:00 PM (सोमवार बंद)" },
-            { id: 28, name: "Kumaramangalam Artillery Museum", marathiName: "कुमारमंगलम तोफखाना संग्रहालय", category: "defense", badge: "🎖️ सैन्य तोफखाना", area: "Deolali Camp", image: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Bofors_40_mm_gun_Artillery_Museum_India.jpg/800px-Bofors_40_mm_gun_Artillery_Museum_India.jpg", desc: "तोफखाना रेजिमेंटचा भव्य लष्करी वारसा, विंटेज तोफा आणि लष्करी इतिहास.", highlight: "Vintage Cannons & Military Pride", mapQuery: "Kumaramangalam Artillery Museum Deolali Nashik", timing: "10:00 AM - 5:00 PM" },
-            { id: 29, name: "India Security Press (ISP)", marathiName: "इंडिया सिक्युरिटी प्रेस", category: "defense", badge: "🏛️ हेरिटेज वास्तू", area: "Nashik Road", image: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/India_Security_Press_Nashik.jpg/800px-India_Security_Press_Nashik.jpg", desc: "देशाचे पासपोर्ट, टपाल तिकिटे आणि न्यायालयीन स्टॅम्प पेपर मुद्रित करणारी ऐतिहासिक संस्था.", highlight: "Passports & Stamp Paper Printing", mapQuery: "India Security Press Nashik Road", timing: "Heritage Landmark (Secure Zone)" },
-            { id: 30, name: "Currency Note Press (CNP)", marathiName: "करन्सी नोट प्रेस", category: "defense", badge: "🏛️ चलनी नोटा मुद्रणालय", area: "Jail Road", image: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/Banknotes_of_the_Indian_rupee.jpg/800px-Banknotes_of_the_Indian_rupee.jpg", desc: "भारतीय चलनी नोटांची छपाई करणारे भारतातील अत्यंत महत्त्वाचे व सुरक्षित मुद्रणालय.", highlight: "Indian Currency Printing Landmark", mapQuery: "Currency Note Press Nashik", timing: "Heritage Landmark (Secure Zone)" },
-            { id: 31, name: "Swatantryaveer Savarkar Smarak", marathiName: "स्वातंत्र्यवीर सावरकर स्मारक", category: "defense", badge: "🇮🇳 सावरकर जन्मस्थान", area: "Bhagur", image: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Vinayak_Damodar_Savarkar.jpg/800px-Vinayak_Damodar_Savarkar.jpg", desc: "स्वातंत्र्यवीर विनायक दामोदर सावरकर यांचे जन्मस्थान; स्वातंत्र्यलढ्यातील वस्तूंचे प्रेरणास्थळ.", highlight: "Savarkar Birthplace Bhagur", mapQuery: "Swatantryaveer Savarkar Smarak Bhagur Nashik", timing: "9:00 AM - 6:00 PM" },
-            { id: 32, name: "Muktibhoomi Smarak", marathiName: "मुक्तिभूमी स्मारक", category: "defense", badge: "🇮🇳 ऐतिहासिक घोषणा भूमी", area: "Yeola", image: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Dr._Bhimrao_Ambedkar.jpg/800px-Dr._Bhimrao_Ambedkar.jpg", desc: "डॉ. बाबासाहेब आंबेडकर यांनी ऐतिहासिक घोषणा केलेली पवित्र भूमी.", highlight: "Dr. B.R. Ambedkar Historical Site", mapQuery: "Muktibhoomi Smarak Yeola Nashik", timing: "8:00 AM - 7:00 PM" },
+            // 5. DEFENSE & NATIONAL PRIDE
+            { id: 27, name: "HAL Aerospace Museum", marathiName: "एचएएल एरोस्पेस म्युझियम", category: "defense", badge: "✈️ लढाऊ विमाने प्रदर्शन", area: "Ozar", image: "https://images.unsplash.com/photo-1519074069444-1ba4ea16e6f9?w=600&auto=format&fit=crop&q=80", desc: "सुखोई Su-30 MKI आणि मिग-21 लढाऊ विमानांचे प्रत्यक्ष मॉडेल्स, एव्हिएशन गॅलरी आणि सिम्युलेटर.", highlight: "Sukhoi Su-30 & Fighter Jets", mapQuery: "HAL Heritage Centre and Aerospace Museum Ozar Nashik", timing: "9:00 AM - 5:00 PM (सोमवार बंद)" },
+            { id: 28, name: "Kumaramangalam Artillery Museum", marathiName: "कुमारमंगलम तोफखाना संग्रहालय", category: "defense", badge: "🎖️ सैन्य तोफखाना इतिहास", area: "Deolali Camp", image: "https://images.unsplash.com/photo-1579273166152-d725a4e2b755?w=600&auto=format&fit=crop&q=80", desc: "१ जुलै २०२४ रोजी सुरू झालेले अत्याधुनिक तोफखाना संग्रहालय; विंटेज तोफा आणि लष्करी वारसा.", highlight: "Vintage Cannons & Military Pride", mapQuery: "Kumaramangalam Artillery Museum Deolali Nashik", timing: "10:00 AM - 5:00 PM" },
+            { id: 29, name: "India Security Press (ISP)", marathiName: "इंडिया सिक्युरिटी प्रेस", category: "defense", badge: "🏛️ राष्ट्रीय हेरिटेज वास्तू", area: "Nashik Road", image: "https://images.unsplash.com/photo-1541872703-74c5e44368f9?w=600&auto=format&fit=crop&q=80", desc: "देशाचे पासपोर्ट, टपाल तिकिटे आणि न्यायालयीन स्टॅम्प पेपर मुद्रित करणारी ऐतिहासिक संस्था.", highlight: "Passports & Stamp Paper Printing", mapQuery: "India Security Press Nashik Road", timing: "Heritage Landmark (Secure Zone)" },
+            { id: 30, name: "Currency Note Press (CNP)", marathiName: "करन्सी नोट प्रेस", category: "defense", badge: "🏛️ चलनी नोटा मुद्रणालय", area: "Jail Road", image: "https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?w=600&auto=format&fit=crop&q=80", desc: "भारतीय चलनी नोटांची छपाई करणारे भारतातील अत्यंत महत्त्वाचे व सुरक्षित मुद्रणालय.", highlight: "Indian Currency Printing Landmark", mapQuery: "Currency Note Press Nashik", timing: "Heritage Landmark (Secure Zone)" },
+            { id: 31, name: "Swatantryaveer Savarkar Smarak", marathiName: "स्वातंत्र्यवीर सावरकर जन्मस्थान", category: "defense", badge: "🇮🇳 सावरकर वाडा", area: "Bhagur", image: "https://images.unsplash.com/photo-1541872703-74c5e44368f9?w=600&auto=format&fit=crop&q=80", desc: "स्वातंत्र्यवीर विनायक दामोदर सावरकर यांचे जन्मस्थान; स्वातंत्र्यलढ्यातील वस्तू जतन केलेले प्रेरणास्थळ.", highlight: "Savarkar Birthplace Bhagur", mapQuery: "Swatantryaveer Savarkar Smarak Bhagur Nashik", timing: "9:00 AM - 6:00 PM" },
+            { id: 32, name: "Muktibhoomi Smarak", marathiName: "मुक्तिभूमी स्मारक", category: "defense", badge: "🇮🇳 ऐतिहासिक घोषणा भूमी", area: "Yeola", image: "https://images.unsplash.com/photo-1541872703-74c5e44368f9?w=600&auto=format&fit=crop&q=80", desc: "डॉ. बाबासाहेब आंबेडकर यांनी 'मी हिंदू म्हणून जन्मलो तरी हिंदू म्हणून मरणार नाही' ही घोषणा केलेली भूमी.", highlight: "Dr. B.R. Ambedkar Historical Site", mapQuery: "Muktibhoomi Smarak Yeola Nashik", timing: "8:00 AM - 7:00 PM" },
 
-            // 6. TEMPLES & PILGRIMAGE (ORIGINAL PHOTOS)
-            { id: 33, name: "Shri Trimbakeshwar Jyotirlinga", marathiName: "श्री त्र्यंबकेश्वर ज्योतिर्लिंग मंदिर", category: "temples", badge: "🛕 १२ ज्योतिर्लिंग", area: "Trimbakeshwar", image: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Trimbakeshwar_Shiva_Temple%2C_Trimbak%2C_Nashik_district.jpg/800px-Trimbakeshwar_Shiva_Temple%2C_Trimbak%2C_Nashik_district.jpg", desc: "भारतातील १२ पवित्र ज्योतिर्लिंगांपैकी एक; काळ्या पाषाणातील अप्रतिम वास्तुकला.", highlight: "12 Jyotirlinga & Kushavart Kund", mapQuery: "Trimbakeshwar Shiva Temple Nashik", timing: "5:30 AM - 9:00 PM" },
-            { id: 34, name: "Shree Saptashrungi Nivasini Devi", marathiName: "श्री सप्तशृंगी निवासिनी देवी", category: "temples", badge: "🛕 साडेतीन शक्तिपीठ", area: "Saptashrungi Gad (Vani)", image: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/Goddess_Saptashrungi_Devi_Temple..jpg/800px-Goddess_Saptashrungi_Devi_Temple..jpg", desc: "सह्याद्रीच्या कड्यावर वसलेले शक्तिपीठ; पायऱ्या आणि फ्युनिक्युलर ट्रॉली सुविधा.", highlight: "Shaktipeeth & Ropeway/Trolley", mapQuery: "Saptashrungi Devi Temple Vani Kalwan", timing: "5:00 AM - 9:30 PM" },
-            { id: 35, name: "Shree Kalaram Sansthan Mandir", marathiName: "श्री काळाराम मंदिर", category: "temples", badge: "🛕 ऐतिहासिक श्रीराम मंदिर", area: "Panchavati", image: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Kalaram_Temple_Nashik_Corner_View.jpg/800px-Kalaram_Temple_Nashik_Corner_View.jpg", desc: "काळ्या पाषाणातील भव्य मंदिर आणि १९३० च्या ऐतिहासिक सत्याग्रहाची पावन भूमी.", highlight: "Black Stone Architecture", mapQuery: "Shree Kalaram Sansthan Mandir Panchavati Nashik", timing: "6:00 AM - 10:00 PM" },
-            { id: 36, name: "Gondeshwar Mahadev Temple", marathiName: "गोंदेश्वर महादेव मंदिर", category: "temples", badge: "🛕 हेमाडपंथी मंदिर", area: "Sinnar", image: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/63/Gondeshwar_temple.jpg/800px-Gondeshwar_temple.jpg", desc: "११व्या शतकातील पंचायतन शैलीतील अप्रतिम दगडी वास्तुकला; राष्ट्रीय संरक्षित स्मारक.", highlight: "11th Century Hemadpanthi Marvel", mapQuery: "Gondeshwar Temple Sinnar", timing: "6:00 AM - 7:00 PM" },
-            { id: 37, name: "Panchavati, Sita Gumpha & Ramkund", marathiName: "पंचवटी, सीता गुंफा आणि रामकुंड", category: "temples", badge: "🛕 रामायण वारसा", area: "Panchavati", image: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Ram_kund_Nashik.jpg/800px-Ram_kund_Nashik.jpg", desc: "प्रभू श्रीरामांचे वनवास वास्तव्य, ५ वटवृक्ष, प्राचीन गुहा आणि पवित्र रामकुंड.", highlight: "Ramkund & Sita Gumpha Walk", mapQuery: "Ramkund Panchavati Nashik", timing: "24 Hours (Maha Aarti at 7 PM)" },
-            { id: 38, name: "Mangi-Tungi Jain Tirth", marathiName: "मांगी-तुंगी जैन तीर्थक्षेत्र", category: "temples", badge: "🛕 १०८ फूट अखंड मूर्ती", area: "Baglan (Satana)", image: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Mangi_Tungi_Rishabhdev_Statue.jpg/800px-Mangi_Tungi_Rishabhdev_Statue.jpg", desc: "जैन धर्माचे पवित्र सिद्धक्षेत्र आणि भगवान ऋषभदेवांची १०८ फूट अखंड मूर्ती.", highlight: "108 Ft Bhagwan Rishabhdev Statue", mapQuery: "Mangi Tungi Jain Temple Nashik", timing: "6:00 AM - 6:00 PM" },
-            { id: 39, name: "Muktidham Temple", marathiName: "मुक्तिधाम मंदिर", category: "temples", badge: "🛕 संगमरवरी १२ ज्योतिर्लिंगे", area: "Nashik Road", image: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/Muktidham_temple_Nashik.jpg/800px-Muktidham_temple_Nashik.jpg", desc: "पांढऱ्या संगमरवरातील भव्य मंदिर; १२ ज्योतिर्लिंगांच्या हुबेहूब प्रतिकृती.", highlight: "White Marble Architecture", mapQuery: "Muktidham Temple Nashik Road", timing: "6:00 AM - 8:00 PM" },
-            { id: 40, name: "Kapaleshwar Mahadev Temple", marathiName: "कपाळेश्वर महादेव मंदिर", category: "temples", badge: "🛕 नंदी नसलेले शिवमंदिर", area: "Panchavati", image: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Kapaleshwar_temple_Nashik.jpg/800px-Kapaleshwar_temple_Nashik.jpg", desc: "जगातील एकमेव असे शिवमंदिर जिथे महादेवाच्या समोर नंदी नाही.", highlight: "Shiva Temple without Nandi", mapQuery: "Kapaleshwar Temple Panchavati Nashik", timing: "5:30 AM - 8:30 PM" },
-            { id: 41, name: "Taked Sarvatirtha (Jatayu Temple)", marathiName: "टाकेद सर्वतीर्थ (जटायू मंदिर)", category: "temples", badge: "🛕 रामायण कालीन तीर्थ", area: "Igatpuri", image: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Ram_kund_Nashik.jpg/800px-Ram_kund_Nashik.jpg", desc: "रामायण काळात जटायू पक्षाने रावणाशी लढून मोक्ष प्राप्त केलेले पवित्र तीर्थ.", highlight: "Jatayu Moksha Sthal", mapQuery: "Taked Sarvatirth Igatpuri", timing: "6:00 AM - 7:00 PM" },
-            { id: 42, name: "Nastampur Shani Maharaj Mandir", marathiName: "नस्तनपूर शनी महाराज मंदिर", category: "temples", badge: "🛕 जागृत शनी देवस्थान", area: "Nandgaon", image: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Trimbakeshwar_Shiva_Temple%2C_Trimbak%2C_Nashik_district.jpg/800px-Trimbakeshwar_Shiva_Temple%2C_Trimbak%2C_Nashik_district.jpg", desc: "उत्तर महाराष्ट्रातील अत्यंत प्रसिद्ध आणि जागृत शनी तीर्थक्षेत्र.", highlight: "Historic Shani Mandir", mapQuery: "Nastampur Shani Maharaj Temple Nandgaon", timing: "5:00 AM - 9:00 PM" },
+            // 6. TEMPLES & HERITAGE
+            { id: 33, name: "Shri Trimbakeshwar Jyotirlinga", marathiName: "श्री त्र्यंबकेश्वर ज्योतिर्लिंग मंदिर", category: "temples", badge: "🛕 १२ ज्योतिर्लिंगांपैकी एक", area: "Trimbakeshwar", image: "https://images.unsplash.com/photo-1590076215667-875d4ef2d7ee?w=600&auto=format&fit=crop&q=80", desc: "भारतातील १२ पवित्र ज्योतिर्लिंगांपैकी एक; काळ्या पाषाणातील अप्रतिम वास्तुकला आणि संयुक्त पिंडी.", highlight: "12 Jyotirlinga & Kushavart Kund", mapQuery: "Trimbakeshwar Shiva Temple Nashik", timing: "5:30 AM - 9:00 PM" },
+            { id: 34, name: "Shree Saptashrungi Nivasini Devi", marathiName: "श्री सप्तशृंगी निवासिनी देवी", category: "temples", badge: "🛕 साडेतीन शक्तिपीठ", area: "Saptashrungi Gad (Vani)", image: "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?w=600&auto=format&fit=crop&q=80", desc: "सह्याद्रीच्या कड्यावर वसलेले महाराष्ट्राचे साडेतीन शक्तिपीठांपैकी अर्धे मूळ पीठ; फ्युनिक्युलर ट्रॉली सुविधा.", highlight: "Shaktipeeth & Ropeway/Trolley", mapQuery: "Saptashrungi Devi Temple Vani Kalwan", timing: "5:00 AM - 9:30 PM" },
+            { id: 35, name: "Shree Kalaram Sansthan Mandir", marathiName: "श्री काळाराम मंदिर", category: "temples", badge: "🛕 ऐतिहासिक श्रीराम मंदिर", area: "Panchavati", image: "https://images.unsplash.com/photo-1609766857041-ed402ea8069a?w=600&auto=format&fit=crop&q=80", desc: "संपूर्ण काळ्या पाषाणातील भव्य मंदिर आणि १९३० च्या ऐतिहासिक मंदिर प्रवेश सत्याग्रहाची पावन भूमी.", highlight: "Black Stone Architecture", mapQuery: "Shree Kalaram Sansthan Mandir Panchavati Nashik", timing: "6:00 AM - 10:00 PM" },
+            { id: 36, name: "Gondeshwar Mahadev Temple", marathiName: "गोंदेश्वर महादेव मंदिर", category: "temples", badge: "🛕 हेमाडपंथी वास्तुकला", area: "Sinnar", image: "https://images.unsplash.com/photo-1544816155-12df9643f363?w=600&auto=format&fit=crop&q=80", desc: "११व्या शतकातील पंचायतन शैलीतील अप्रतिम दगडी वास्तुकला; राष्ट्रीय संरक्षित स्मारक.", highlight: "11th Century Hemadpanthi Marvel", mapQuery: "Gondeshwar Temple Sinnar", timing: "6:00 AM - 7:00 PM" },
+            { id: 37, name: "Panchavati, Sita Gumpha & Ramkund", marathiName: "पंचवटी, सीता गुंफा आणि रामकुंड", category: "temples", badge: "🛕 रामायण वारसा & गोदातीर", area: "Panchavati", image: "https://images.unsplash.com/photo-1590076215667-875d4ef2d7ee?w=600&auto=format&fit=crop&q=80", desc: "प्रभू श्रीरामांचे वनवास वास्तव्य, ५ वटवृक्ष, प्राचीन गुहा आणि कुंभमेळ्याचे मुख्य स्नानतीर्थ रामकुंड.", highlight: "Ramkund & Sita Gumpha Walk", mapQuery: "Ramkund Panchavati Nashik", timing: "24 Hours (Maha Aarti at 7 PM)" },
+            { id: 38, name: "Mangi-Tungi Jain Tirth", marathiName: "मांगी-तुंगी जैन तीर्थक्षेत्र", category: "temples", badge: "🛕 १०८ फूट अखंड मूर्ती", area: "Baglan (Satana)", image: "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?w=600&auto=format&fit=crop&q=80", desc: "जैन धर्माचे पवित्र सिद्धक्षेत्र आणि भगवान ऋषभदेवांची १०८ फूट उंच विशालकाय अखंड पाषाणातील मूर्ती.", highlight: "108 Ft Bhagwan Rishabhdev Statue", mapQuery: "Mangi Tungi Jain Temple Nashik", timing: "6:00 AM - 6:00 PM" },
+            { id: 39, name: "Muktidham Temple", marathiName: "मुक्तिधाम मंदिर", category: "temples", badge: "🛕 संगमरवरी १२ ज्योतिर्लिंगे", area: "Nashik Road", image: "https://images.unsplash.com/photo-1609766857041-ed402ea8069a?w=600&auto=format&fit=crop&q=80", desc: "पांढऱ्या संगमरवरातील भव्य मंदिर; १२ ज्योतिर्लिंगांच्या हुबेहूब प्रतिकृती आणि कोरलेली भगवद्गीता.", highlight: "White Marble Architecture", mapQuery: "Muktidham Temple Nashik Road", timing: "6:00 AM - 8:00 PM" },
+            { id: 40, name: "Kapaleshwar Mahadev Temple", marathiName: "कपाळेश्वर महादेव मंदिर", category: "temples", badge: "🛕 नंदी नसलेले शिवमंदिर", area: "Panchavati", image: "https://images.unsplash.com/photo-1544816155-12df9643f363?w=600&auto=format&fit=crop&q=80", desc: "जगातील एकमेव असे शिवमंदिर जिथे महादेवाच्या समोर नंदी नाही; गोदाकाठावरील अतिशय प्राचीन मंदिर.", highlight: "Shiva Temple without Nandi", mapQuery: "Kapaleshwar Temple Panchavati Nashik", timing: "5:30 AM - 8:30 PM" },
+            { id: 41, name: "Taked Sarvatirtha (Jatayu Temple)", marathiName: "टाकेद सर्वतीर्थ (जटायू मंदिर)", category: "temples", badge: "🛕 रामायण कालीन तीर्थ", area: "Igatpuri", image: "https://images.unsplash.com/photo-1590076215667-875d4ef2d7ee?w=600&auto=format&fit=crop&q=80", desc: "रामायण काळात जटायू पक्षाने रावणाशी लढून मोक्ष प्राप्त केलेले पवित्र तीर्थ.", highlight: "Jatayu Moksha Sthal", mapQuery: "Taked Sarvatirth Igatpuri", timing: "6:00 AM - 7:00 PM" },
+            { id: 42, name: "Nastampur Shani Maharaj Mandir", marathiName: "नस्तनपूर शनी महाराज मंदिर", category: "temples", badge: "🛕 जागृत शनी देवस्थान", area: "Nandgaon", image: "https://images.unsplash.com/photo-1544816155-12df9643f363?w=600&auto=format&fit=crop&q=80", desc: "उत्तर महाराष्ट्रातील अत्यंत प्रसिद्ध आणि जागृत शनी तीर्थक्षेत्र.", highlight: "Historic Shani Mandir", mapQuery: "Nastampur Shani Maharaj Temple Nandgaon", timing: "5:00 AM - 9:00 PM" },
 
-            // 7. WINE & AGRI-TOURISM (ORIGINAL PHOTOS)
-            { id: 43, name: "Sula Vineyards", marathiName: "सुला व्हिनयार्ड्स", category: "wine", badge: "🍇 वाइन टूरिझम पायोनियर", area: "Govardhan Village", image: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/Sula_Vineyards_Nashik.jpg/800px-Sula_Vineyards_Nashik.jpg", desc: "भारतातील पहिली आणि सर्वाधिक लोकप्रिय वाइनरी; वाइन टेस्टिंग टूर्स आणि सनसेट व्ह्यू.", highlight: "Wine Tasting & Sunset Deck", mapQuery: "Sula Vineyards Govardhan Nashik", timing: "11:30 AM - 10:30 PM" },
-            { id: 44, name: "Soma Vine Village", marathiName: "सोमा वाइन व्हिलेज", category: "wine", badge: "🍇 बॅकवॉटर रिसॉर्ट स्टे", area: "Gangapur Dam", image: "https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=600&auto=format&fit=crop&q=80", desc: "गंगापूर धरणाच्या बॅकवॉटरसमोर असलेला इन्फिनिटी पूल आणि लक्झरी रिसॉर्ट स्टे.", highlight: "Infinity Pool & Waterfront Dining", mapQuery: "Soma Vine Village Gangapur Dam Nashik", timing: "10:00 AM - 10:00 PM" },
-            { id: 45, name: "York Winery & Tasting Room", marathiName: "यॉर्क वाइनरी आणि टेस्टिंग रूम", category: "wine", badge: "🍇 शांत सनसेट डेक", area: "Gangapur Dam Road", image: "https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?w=600&auto=format&fit=crop&q=80", desc: "शांत वातावरण, धरणाच्या पाण्याचा नजराणा आणि उत्कृष्ट रेड व स्पार्कलिंग वाइन.", highlight: "Dam View Sunset Deck", mapQuery: "York Winery and Tasting Room Nashik", timing: "12:00 PM - 10:00 PM" },
-            { id: 46, name: "Khapre & Sagar Grapes Farms", marathiName: "खापरे व सागर द्राक्षबागा", category: "wine", badge: "🌾 कृषी पर्यटन", area: "Niphad", image: "https://images.unsplash.com/photo-1464226184884-fa280b87c399?w=600&auto=format&fit=crop&q=80", desc: "निफाड परिसरातील विस्तीर्ण द्राक्षबागा, प्रत्यक्ष शेतात फिरणे आणि शेतकरी बाजार.", highlight: "Grape Harvesting & Farm Tour", mapQuery: "Sagar Grapes Garden Niphad Nashik", timing: "8:00 AM - 6:00 PM" },
+            // 7. WINE & AGRI-TOURISM
+            { id: 43, name: "Sula Vineyards", marathiName: "सुला व्हिनयार्ड्स", category: "wine", badge: "🍇 वाइन टूरिझम पायोनियर", area: "Govardhan Village", image: "https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?w=600&auto=format&fit=crop&q=80", desc: "भारतातील पहिली आणि सर्वाधिक लोकप्रिय वाइनरी; वाइन टेस्टिंग टूर्स, रेस्टॉरंट्स आणि सनसेट व्ह्यू.", highlight: "Wine Tasting & Sunset Deck", mapQuery: "Sula Vineyards Govardhan Nashik", timing: "11:30 AM - 10:30 PM" },
+            { id: 44, name: "Soma Vine Village", marathiName: "सोमा वाइन व्हिलेज", category: "wine", badge: "🍇 बॅकवॉटर रिसॉर्ट स्टे", area: "Gangapur Dam", image: "https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=600&auto=format&fit=crop&q=80", desc: "गंगापूर धरणाच्या बॅकवॉटरसमोर असलेला इन्फिनिटी पूल, लक्झरी रिसॉर्ट स्टे आणि बॅरल रूम.", highlight: "Infinity Pool & Waterfront Dining", mapQuery: "Soma Vine Village Gangapur Dam Nashik", timing: "10:00 AM - 10:00 PM" },
+            { id: 45, name: "York Winery & Tasting Room", marathiName: "यॉर्क वाइनरी आणि टेस्टिंग रूम", category: "wine", badge: "🍇 शांत सनसेट डेक", area: "Gangapur Dam Road", image: "https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?w=600&auto=format&fit=crop&q=80", desc: "शांत वातावरण, धरणाच्या पाण्याचा विहंगम नजराणा आणि उत्कृष्ट रेड व स्पार्कलिंग वाइन.", highlight: "Dam View Sunset Deck", mapQuery: "York Winery and Tasting Room Nashik", timing: "12:00 PM - 10:00 PM" },
+            { id: 46, name: "Khapre & Sagar Grapes Farms", marathiName: "खापरे व सागर द्राक्षबागा", category: "wine", badge: "🌾 ग्रामीण कृषी पर्यटन", area: "Niphad", image: "https://images.unsplash.com/photo-1464226184884-fa280b87c399?w=600&auto=format&fit=crop&q=80", desc: "निफाड परिसरातील विस्तीर्ण द्राक्षबागा, प्रत्यक्ष शेतात फिरणे आणि शेतकरी बाजारपेठ.", highlight: "Grape Harvesting & Farm Tour", mapQuery: "Sagar Grapes Garden Niphad Nashik", timing: "8:00 AM - 6:00 PM" },
 
-            // 8. FORTS & TREKS (ORIGINAL PHOTOS)
-            { id: 47, name: "Harihar Fort", marathiName: "किल्ले हरिहर (८०° कातळ पायऱ्या)", category: "forts", badge: "⛰️ थरारक रॉक-कट पायऱ्या", area: "Trimbak Range", image: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Harihar_Fort_Steep_Stairs.jpg/800px-Harihar_Fort_Steep_Stairs.jpg", desc: "८० अंशांच्या उभ्या कातळ-कोरीव पायऱ्या असलेला जगप्रसिद्ध आव्हानात्मक ट्रेक.", highlight: "80-Degree Rock Cut Steps", mapQuery: "Harihar Fort Trek Nashik", timing: "Sunrise to Sunset" },
-            { id: 48, name: "Ramshej Fort", marathiName: "किल्ले रामशेज", category: "forts", badge: "⛰️ मराठा शौर्य इतिहास", area: "Dindori Road", image: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Ramshej_Fort_Nashik.jpg/800px-Ramshej_Fort_Nashik.jpg", desc: "मावळ्यांनी मुघल सैन्याविरुद्ध तब्बल साडेपाच वर्षे झुंज दिलेला अजिंक्य किल्ला.", highlight: "Historic 5.5 Year Battle Resistance", mapQuery: "Ramshej Fort Nashik", timing: "Sunrise to Sunset" },
-            { id: 49, name: "Salher Fort", marathiName: "साल्हेर दुर्ग (सर्वोच्च किल्ला)", category: "forts", badge: "⛰️ २ ऱ्या क्रमांकाचे शिखर", area: "Baglan", image: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Salher_Fort_Peak.jpg/800px-Salher_Fort_Peak.jpg", desc: "महाराष्ट्रातील दुसऱ्या क्रमांकाचे सर्वोच्च शिखर (१५६७ मी.) आणि ऐतिहासिक साल्हेर युद्धाची भूमी.", highlight: "Highest Fort Peak (1567m) & History", mapQuery: "Salher Fort Baglan Nashik", timing: "Full Day Trek" },
-            { id: 50, name: "Pandavleni Buddhist Caves", marathiName: "पांडवलेणी (त्रिरश्मी बौद्ध लेणी)", category: "forts", badge: "🏛️ प्राचीन बौद्ध लेणी", area: "Nashik-Mumbai Highway", image: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Pandavleni_Caves_Nashik.jpg/800px-Pandavleni_Caves_Nashik.jpg", desc: "इसवी सन पूर्व दुसऱ्या शतकातील २४ प्राचीन कातळ-कोरीव बौद्ध लेणी आणि चैत्यगृह.", highlight: "24 Rock-cut Caves & City Panoramic View", mapQuery: "Pandav Leni Caves Nashik", timing: "8:00 AM - 6:00 PM" }
+            // 8. FORTS & TREKS
+            { id: 47, name: "Harihar Fort", marathiName: "किल्ले हरिहर (८०° कातळ पायऱ्या)", category: "forts", badge: "⛰️ थरारक रॉक-कट पायऱ्या", area: "Trimbak Range", image: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=600&auto=format&fit=crop&q=80", desc: "जगातील सर्वात आव्हानात्मक ८० अंशांच्या उभ्या कातळ-कोरीव पायऱ्या असलेला जगप्रसिद्ध ट्रेक.", highlight: "80-Degree Rock Cut Steps", mapQuery: "Harihar Fort Trek Nashik", timing: "Sunrise to Sunset" },
+            { id: 48, name: "Ramshej Fort", marathiName: "किल्ले रामशेज", category: "forts", badge: "⛰️ मराठा शौर्य इतिहास", area: "Dindori Road", image: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=600&auto=format&fit=crop&q=80", desc: "छत्रपती संभाजी महाराजांच्या काळात मावळ्यांनी मुघल सैन्याविरुद्ध तब्बल साडेपाच वर्षे झुंज दिलेला किल्ला.", highlight: "Historic 5.5 Year Battle Resistance", mapQuery: "Ramshej Fort Nashik", timing: "Sunrise to Sunset" },
+            { id: 49, name: "Salher & Mulher Forts", marathiName: "साल्हेर आणि मुल्हेर दुर्ग", category: "forts", badge: "⛰️ २ ऱ्या क्रमांकाचे शिखर", area: "Baglan", image: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=600&auto=format&fit=crop&q=80", desc: "महाराष्ट्रातील दुसऱ्या क्रमांकाचे सर्वोच्च शिखर (१५६७ मी.) आणि ऐतिहासिक साल्हेर युद्धाची भूमी.", highlight: "Highest Fort Peak (1567m) & History", mapQuery: "Salher Fort Baglan Nashik", timing: "Full Day Trek" },
+            { id: 50, name: "Pandavleni Buddhist Caves", marathiName: "पांडवलेणी (त्रिरश्मी बौद्ध लेणी)", category: "forts", badge: "🏛️ प्राचीन बौद्ध लेणी", area: "Nashik-Mumbai Highway", image: "https://images.unsplash.com/photo-1544816155-12df9643f363?w=600&auto=format&fit=crop&q=80", desc: "इसवी सन पूर्व दुसऱ्या शतकातील २४ प्राचीन कातळ-कोरीव बौद्ध लेणी, शिलालेख आणि चैत्यगृह.", highlight: "24 Rock-cut Caves & City View", mapQuery: "Pandav Leni Caves Nashik", timing: "8:00 AM - 6:00 PM" }
         ];
 
+        // State Management
         let currentCategory = 'all';
         let userPlan = JSON.parse(localStorage.getItem('godaNashikPlan')) || [];
 
         const categoryLabels = {
-            all: "सर्व ठिकाणे", misal: "नाशिक मिसळ", temples: "मंदिरे व तीर्थ", street: "स्ट्रीट फूड",
-            cafes: "कॅफेज", nonveg: "नॉन-व्हेज & बिर्याणी", defense: "डिफेन्स & वारसा",
-            wine: "वाइन & फार्म्स", forts: "किल्ले & लेणी"
+            all: "सर्व ठिकाणे",
+            misal: "नाशिक मिसळ",
+            temples: "मंदिरे व तीर्थ",
+            street: "स्ट्रीट फूड & मिठाई",
+            cafes: "कॅफेज",
+            nonveg: "नॉन-व्हेज & बिर्याणी",
+            defense: "डिफेन्स & अभिमान",
+            wine: "वाइन & कृषी पर्यटन",
+            forts: "किल्ले, लेणी व ट्रेक्स"
         };
 
         const facts = [
@@ -340,6 +226,7 @@
             "नाशिक हे भारताची 'Wine Capital' मानले जाते, जिथून देश-विदेशात वाइन जाते."
         ];
         let factIdx = 0;
+
         function nextFact() {
             factIdx = (factIdx + 1) % facts.length;
             document.getElementById('factText').innerText = facts[factIdx];
@@ -367,7 +254,7 @@
                 card.className = "bg-white rounded-2xl overflow-hidden shadow-sm border border-stone-200 transition hover:shadow-md";
                 card.innerHTML = `
                     <div class="relative h-44 w-full overflow-hidden bg-stone-100">
-                        <img src="${spot.image}" loading="lazy" alt="${spot.name}" class="w-full h-full object-cover">
+                        <img src="${spot.image}" alt="${spot.name}" class="w-full h-full object-cover">
                         <span class="absolute top-2.5 left-2.5 bg-stone-900/80 backdrop-blur-sm text-amber-400 font-bold text-[10px] px-2.5 py-1 rounded-full border border-amber-500/30">
                             ${spot.badge}
                         </span>
@@ -403,7 +290,7 @@
             });
         }
 
-        // Filters
+        // Filter Logic
         function filterCategory(cat) {
             currentCategory = cat;
             document.querySelectorAll('.cat-pill').forEach(btn => btn.classList.remove('active-pill'));
@@ -433,7 +320,7 @@
             renderSpots(filtered);
         }
 
-        // Wishlist / Plan
+        // Tour Plan / Wishlist Logic
         function toggleSaveSpot(id) {
             if (userPlan.includes(id)) {
                 userPlan = userPlan.filter(item => item !== id);
@@ -495,79 +382,31 @@
         }
 
         // ==========================================
-        // 🎬 SPLASH CONTROLLER
+        // PWA: Install App button + offline support
         // ==========================================
-        const splashSlides = ['splashSlide1', 'splashSlide2', 'splashSlide3', 'splashSlide4', 'splashSlide5', 'splashSlide6', 'splashSlide7'];
-        let currentSplashIdx = 0;
-        let splashTimer = null;
-
-        function runSplashScreen() {
-            const splashEl = document.getElementById('splashScreen');
-            if (!splashEl) return;
-
-            const totalSlides = splashSlides.length;
-            const intervalTime = 1600;
-
-            splashTimer = setInterval(() => {
-                const prevSlide = document.getElementById(splashSlides[currentSplashIdx]);
-                if (prevSlide) prevSlide.classList.remove('active');
-
-                currentSplashIdx++;
-
-                const progress = (currentSplashIdx / (totalSlides - 1)) * 100;
-                const progBar = document.getElementById('splashProgress');
-                if (progBar) progBar.style.width = `${progress}%`;
-
-                if (currentSplashIdx < totalSlides) {
-                    const nextSlide = document.getElementById(splashSlides[currentSplashIdx]);
-                    if (nextSlide) nextSlide.classList.add('active');
-                } else {
-                    clearInterval(splashTimer);
-                    setTimeout(dismissSplash, 1200);
-                }
-            }, intervalTime);
-        }
-
-        function dismissSplash() {
-            if (splashTimer) clearInterval(splashTimer);
-            const splashEl = document.getElementById('splashScreen');
-            if (splashEl) {
-                splashEl.style.opacity = '0';
-                setTimeout(() => { splashEl.style.display = 'none'; }, 700);
-            }
-        }
-
-        // ==========================================
-        // 📲 PWA INSTALL CONTROLLER
-        // ==========================================
-        let deferredPrompt;
-        const installBtn = document.getElementById('installAppBtn');
-
+        let deferredPrompt = null;
         window.addEventListener('beforeinstallprompt', (e) => {
             e.preventDefault();
             deferredPrompt = e;
-            if (installBtn) installBtn.classList.remove('hidden');
+            document.getElementById('installAppBtn').classList.remove('hidden');
         });
-
-        function installPWA() {
-            if (deferredPrompt) {
-                deferredPrompt.prompt();
-                deferredPrompt.userChoice.then((choiceResult) => {
-                    if (choiceResult.outcome === 'accepted' && installBtn) {
-                        installBtn.classList.add('hidden');
-                    }
-                    deferredPrompt = null;
-                });
-            }
+        async function installPWA() {
+            if (!deferredPrompt) return;
+            deferredPrompt.prompt();
+            try { await deferredPrompt.userChoice; } catch (e) {}
+            deferredPrompt = null;
+            document.getElementById('installAppBtn').classList.add('hidden');
+        }
+        window.addEventListener('appinstalled', () => {
+            deferredPrompt = null;
+            document.getElementById('installAppBtn').classList.add('hidden');
+        });
+        if ('serviceWorker' in navigator && location.protocol.startsWith('http')) {
+            window.addEventListener('load', () => navigator.serviceWorker.register('sw.js').catch(() => {}));
         }
 
-        window.addEventListener('appinstalled', () => {
-            if (installBtn) installBtn.classList.add('hidden');
-        });
-
-        // App Init
+        // Initialize App
         document.addEventListener('DOMContentLoaded', () => {
-            runSplashScreen();
             updatePlanBadge();
             renderSpots(spots);
         });
